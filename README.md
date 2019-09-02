@@ -1,7 +1,5 @@
 # Manage Cards - User Interaction for Wallet made with Flutter using BLOC
 
-### ScreenShots
-
 <img src="assets/manage_cards_01.gif">
  
 ### Show some :heart: and star the repo to support the project or :smile:[Follow Me](https://github.com/marcioquimbundo).Thanks!
