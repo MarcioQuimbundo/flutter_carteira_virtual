@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_wallet/src/ui/widgets/card_list.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,12 +9,29 @@ class HomePage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.white,
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+          onPressed: () {},
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.black,
+            ),
+            onPressed: () {},
+          )
+        ],
         title: Text(
           "Wallet",
           style: TextStyle(
-              fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.w600),
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.w600),
         ),
       ),
+      body: CardList(),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class CardModel {
   List<CardResults> results;
   CardModel({this.results});
@@ -18,7 +20,7 @@ class CardResults {
   String cardMonth;
   String cardYear;
   String cardCvv;
-  String cardColor;
+  Color cardColor;
   String cardType;
 
   CardResults(
