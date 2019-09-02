@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_wallet/src/models/card_color_model.dart';
 
 class CardColor {
-  static const baseColors = <Color> [
+  static const baseColors = <Color>[
     Color.fromRGBO(61, 132, 223, 1.0),
     Color.fromRGBO(114, 71, 200, 1.0),
     Color.fromRGBO(106, 188, 121, 1.0),
@@ -12,4 +13,8 @@ class CardColor {
     Color.fromRGBO(222, 88, 116, 1.0),
     Color.fromRGBO(128, 182, 234, 1.0),
   ];
+
+  static List<CardColorModel> cardColors = List<CardColorModel>.generate(
+      baseColors.length,
+      (int index) => CardColorModel(isSelected: false, cardColor: index));
 }

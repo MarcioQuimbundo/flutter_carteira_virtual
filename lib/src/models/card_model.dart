@@ -26,6 +26,7 @@ class CardResults {
   CardResults(
       {this.cardHolderName,
       this.cardNumber,
+      this.cardMonth,
       this.cardYear,
       this.cardCvv,
       this.cardColor,

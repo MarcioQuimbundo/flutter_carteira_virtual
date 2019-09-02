@@ -14,6 +14,8 @@ class CardListBloc extends BlocBase {
   //retrieve data from stream
   Stream<List<CardResults>> get cardList => _cardsCollection.stream;
 
+
+
   void initialData() async {
     var initialData =
         await rootBundle.loadString("assets/data/initialData.json");
@@ -27,6 +29,11 @@ class CardListBloc extends BlocBase {
 
   CardListBloc() {
     initialData();
+  }
+
+  void addCardToList(CardResults newCard) {
+    _cardResults.add(newCard);
+    _cardsCollection.sink.add(_cardResults);
   }
 
   @override
