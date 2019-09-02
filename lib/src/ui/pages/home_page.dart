@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_wallet/src/ui/pages/card_type.dart';
+import 'package:flutter_card_wallet/src/ui/pages/card_type_page.dart';
 import 'package:flutter_card_wallet/src/ui/widgets/card_list.dart';
 
 class HomePage extends StatelessWidget {
