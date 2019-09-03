@@ -1,11 +1,12 @@
 import 'dart:async';
 
-class Validators {
+class Validators{
   final validateCardHolderName = StreamTransformer<String, String>.fromHandlers(
-    handleData: (cardHolderName, sink) {
-      RegExp('[a-zA-Z]').hasMatch(cardHolderName) ? sink.add(cardHolderName) : sink.addError("Enter a valid name");
-    }
-  );
+      handleData: (cardHolderName, sink) {
+    RegExp('[a-zA-Z]').hasMatch(cardHolderName)
+        ? sink.add(cardHolderName)
+        : sink.addError('Enter a valid Name');
+  });
 
   final validateCardNumber = StreamTransformer<String, String>.fromHandlers(
       handleData: (cardNumber, sink) {
@@ -48,5 +49,6 @@ class Validators {
       sink.addError('Invalid cvv');
     }
   });
+
 
 }

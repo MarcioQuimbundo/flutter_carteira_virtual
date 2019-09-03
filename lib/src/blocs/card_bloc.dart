@@ -29,16 +29,26 @@ class CardBloc extends BlocBase with Validators {
   Stream<bool> get savecardValid => Observable.combineLatest5(cardHolderName,
       cardNumber, cardMonth, cardYear, cardCvv, (ch, cn, cm, cy, cv) => true);
 
+  //retrieve data from stream
+  Stream<String> get cardHolderName =>
+      _cardHolderName.stream.transform(validateCardHolderName);
+  Stream<String> get cardNumber =>
+      _cardNumber.stream.transform(validateCardNumber);
+  Stream<String> get cardMonth => _cardMonth.stream.transform(validateCardMonth);
+  Stream<String> get cardYear => _cardYear.stream.transform(validateCardYear);
+  Stream<String> get cardCvv =>
+      _cardCvv.stream.transform(validateCardVerificationValue);
+  Stream<String> get cardType => _cardType.stream;
+  Stream<int> get cardColorIndexSelected => _cardColorIndexSelected.stream;
   void saveCard() {
     final newCard = CardResults(
-      cardHolderName: _cardHolderName.value,
-      cardNumber: _cardNumber.value.replaceAll(RegExp(r'\s+\b|\b\s'), ''),
-      cardMonth: _cardMonth.value,
-      cardYear: _cardYear.value,
-      cardCvv: _cardCvv.value,
-      cardColor: CardColor.baseColors[_cardColorIndexSelected.value],
-      cardType: _cardType.value
-    );
+        cardHolderName: _cardHolderName.value,
+        cardNumber: _cardNumber.value.replaceAll(RegExp(r'\s+\b|\b\s'), ''),
+        cardMonth: _cardMonth.value,
+        cardYear: _cardYear.value,
+        cardCvv: _cardCvv.value,
+        cardColor: CardColor.baseColors[_cardColorIndexSelected.value],
+        cardType: _cardType.value);
     cardListBloc.addCardToList(newCard);
   }
 
@@ -48,18 +58,6 @@ class CardBloc extends BlocBase with Validators {
     _cardsColors.sink.add(CardColor.cardColors);
     _cardColorIndexSelected.sink.add(colorIndex);
   }
-
-  //retrieve data from stream
-  Stream<String> get cardHolderName =>
-      _cardType.stream.transform(validateCardHolderName);
-  Stream<String> get cardNumber =>
-      _cardType.stream.transform(validateCardNumber);
-  Stream<String> get cardMonth => _cardType.stream.transform(validateCardMonth);
-  Stream<String> get cardYear => _cardType.stream.transform(validateCardYear);
-  Stream<String> get cardCvv =>
-      _cardType.stream.transform(validateCardVerificationValue);
-  Stream<String> get cardType => _cardType.stream;
-  Stream<int> get cardColorIndexSelected => _cardColorIndexSelected.stream;
 
   @override
   void dispose() {

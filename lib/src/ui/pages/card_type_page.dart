@@ -1,4 +1,7 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_wallet/src/blocs/card_bloc.dart';
+import 'package:flutter_card_wallet/src/ui/pages/card_create_page.dart';
 import 'package:flutter_card_wallet/src/ui/widgets/my_appbar.dart';
 
 class CardType extends StatelessWidget {
@@ -66,7 +69,15 @@ class CardType extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 5.0),
       child: RaisedButton(
         elevation: 10.0,
-        onPressed: () {},
+        onPressed: () {
+          var blocProviderCardCreate = BlocProvider(
+            bloc: CardBloc(),
+            child: CardCreatePage(),
+          );
+          blocProviderCardCreate.bloc.selectCardType(buttonText);
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => blocProviderCardCreate));
+        },
         color: buttonColor,
         child: Text(
           buttonText,

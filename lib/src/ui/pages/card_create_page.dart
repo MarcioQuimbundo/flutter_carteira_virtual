@@ -173,14 +173,13 @@ class _CardCreatePageState extends State<CardCreatePage> {
             color: Colors.lightBlue,
             onPressed: snapshot.hasData
                 ? () {
-                    /*var blocProviderCardWallet = BlocProvider(
-                      bloc: bloc,
-                      child: CardWallet(),
-                    );
+                    var blocProviderCardWallet = BlocProvider(
+                        bloc: bloc, child: Container() //CardWallet(),
+                        );
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => blocProviderCardWallet));*/
+                            builder: (context) => blocProviderCardWallet));
                   }
                 : null,
           ),
@@ -216,6 +215,9 @@ class _CardCreatePageState extends State<CardCreatePage> {
                       ),
                       _cardHolderName,
                       _cardNumber,
+                      SizedBox(
+                        height: 8.0,
+                      ),
                       Row(
                         children: <Widget>[
                           _cardMonth,
