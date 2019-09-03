@@ -80,7 +80,7 @@ class _CardCreatePageState extends State<CardCreatePage> {
               maxLengthEnforced: true,
               inputFormatters: [
                 MaskedTextInputFormatter(
-                    mask: 'xxxx xxxxx xxxxx xxxx', separator: " "),
+                    mask: 'xxxx xxxx xxxx xxxx', separator: " "),
               ],
               decoration: InputDecoration(
                   border: InputBorder.none,
