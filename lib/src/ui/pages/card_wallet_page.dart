@@ -1,2 +1,109 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_wallet/src/blocs/card_bloc.dart';
+import 'package:flutter_card_wallet/src/ui/pages/home_page.dart';
+import 'package:flutter_card_wallet/src/ui/widgets/card_front.dart';
+import 'package:flutter_card_wallet/src/ui/widgets/my_appbar.dart';
 
+class CardWallet extends StatefulWidget {
+  @override
+  _CardWallet createState() => _CardWallet();
+}
+
+class _CardWallet extends State<CardWallet> with TickerProviderStateMixin {
+  AnimationController rotateController;
+  AnimationController opacityController;
+  Animation<double> animation;
+  Animation<double> opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    rotateController = AnimationController(
+        vsync: this, duration: new Duration(milliseconds: 300));
+    opacityController = AnimationController(
+        vsync: this, duration: new Duration(milliseconds: 2000));
+
+    CurvedAnimation curvedAnimation = new CurvedAnimation(
+        parent: opacityController, curve: Curves.fastOutSlowIn);
+
+    animation = Tween(begin: -2.0, end: -3.15).animate(rotateController);
+    opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(curvedAnimation);
+
+    
+
+    rotateController.forward();
+    opacityController.forward();
+  }
+
+  @override
+  dispose() {
+    rotateController.dispose();
+    opacityController.dispose();
+    super.dispose();
+  }
+  
+
+  @override
+  Widget build(BuildContext context) {
+    final CardBloc bloc = BlocProvider.of<CardBloc>(context);
+    
+    opacityAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        bloc.saveCard();        
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    });
+    final _screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+        appBar: MyAppBar(
+          appBarTitle: 'Wallet',
+          leadingIcon: Icons.arrow_back,
+          context: context,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 50.0),
+                child: AnimatedBuilder(
+                    animation: animation,
+                    child: Container(
+                      width: _screenSize.width / 1.6,
+                      height: _screenSize.height / 2.2,
+                      child: CardFront(rotatedTurnsValue: -3),
+                    ),
+                    builder: (context, _widget) {
+                      return Transform.rotate(
+                        angle: animation.value,
+                        child: _widget,
+                      );
+                    }),
+              ),
+              SizedBox(
+                height: 150.0,
+              ),
+              CircularProgressIndicator(
+                strokeWidth: 6.0,
+                backgroundColor: Colors.lightBlue,
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              FadeTransition(
+                opacity: opacityAnimation,
+                child: Text(
+                  'Card Added',
+                  style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}

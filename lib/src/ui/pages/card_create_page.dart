@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_wallet/src/blocs/card_bloc.dart';
 import 'package:flutter_card_wallet/src/models/card_color_model.dart';
+import 'package:flutter_card_wallet/src/ui/pages/card_wallet_page.dart';
 import 'package:flutter_card_wallet/src/ui/widgets/card_back.dart';
 import 'package:flutter_card_wallet/src/ui/widgets/card_front.dart';
 import 'package:flutter_card_wallet/src/ui/widgets/flip_card.dart';
@@ -174,7 +175,7 @@ class _CardCreatePageState extends State<CardCreatePage> {
             onPressed: snapshot.hasData
                 ? () {
                     var blocProviderCardWallet = BlocProvider(
-                        bloc: bloc, child: Container() //CardWallet(),
+                        bloc: bloc, child: CardWallet(),
                         );
                     Navigator.push(
                         context,

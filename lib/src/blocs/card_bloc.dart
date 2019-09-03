@@ -6,7 +6,7 @@ import 'package:flutter_card_wallet/src/utils/card_color.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_card_wallet/src/utils/validators.dart';
 
-class CardBloc extends BlocBase with Validators {
+class CardBloc with Validators implements BlocBase {
   BehaviorSubject<String> _cardHolderName = BehaviorSubject<String>();
   BehaviorSubject<String> _cardNumber = BehaviorSubject<String>();
   BehaviorSubject<String> _cardMonth = BehaviorSubject<String>();

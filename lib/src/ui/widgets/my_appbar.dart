@@ -12,8 +12,13 @@ class MyAppBar extends AppBar {
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600)),
           leading: IconButton(
-            icon: Icon(leadingIcon, color: Colors.black,),
-            onPressed: () {},
+            icon: Icon(
+              leadingIcon,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
         );
 }
